@@ -70,8 +70,6 @@ export function SidebarResponsive(props) {
   const btnRef = React.useRef();
 
   const { routes } = props;
-  // let isWindows = navigator.platform.startsWith("Win");
-  //  BRAND
 
   return (
     <Flex display={{ sm: "flex", xl: "none" }} alignItems='center'>

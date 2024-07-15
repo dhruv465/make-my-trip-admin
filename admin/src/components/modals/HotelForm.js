@@ -115,7 +115,7 @@ const HotelForm = ({ hotelData, onClose }) => {
         setImageFile(null);
       }
 
-      onClose(); // Close the modal after successful submission
+      // onClose(); // Close the modal after successful submission
     } catch (error) {
       console.error('Error submitting form:', error);
       toast({
