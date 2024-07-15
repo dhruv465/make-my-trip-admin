@@ -18,6 +18,7 @@ import {
 } from "@chakra-ui/react";
 import { MdOutlineMoreHoriz, MdOutlineHotel, MdFlightTakeoff } from "react-icons/md";
 import HotelForm from "../modals/HotelForm";
+import FlightForm from "../modals/FlightForm"; // Assuming FlightForm modal exists
 
 export default function Banner(props) {
   const { ...rest } = props;
@@ -55,6 +56,13 @@ export default function Banner(props) {
     isOpen: isOpenHotelForm,
     onOpen: onOpenHotelForm,
     onClose: onCloseHotelForm,
+  } = useDisclosure();
+
+  // Modal for FlightForm
+  const {
+    isOpen: isOpenFlightForm,
+    onOpen: onOpenFlightForm,
+    onClose: onCloseFlightForm,
   } = useDisclosure();
 
   return (
@@ -100,6 +108,7 @@ export default function Banner(props) {
               bg: "transparent",
             }}
             mb="10px"
+            onClick={onOpenFlightForm} // Open FlightForm modal
           >
             <Flex align="center">
               <Icon as={MdFlightTakeoff} h="16px" w="16px" me="8px" />
@@ -133,6 +142,19 @@ export default function Banner(props) {
         </MenuList>
       </Menu>
 
+      {/* FlightForm Modal */}
+      <Modal isOpen={isOpenFlightForm} onClose={onCloseFlightForm} size="xl">
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Add Flight</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <FlightForm />
+          </ModalBody>
+        </ModalContent>
+      </Modal>
+
+      {/* HotelForm Modal */}
       <Modal isOpen={isOpenHotelForm} onClose={onCloseHotelForm} size="xl">
         <ModalOverlay />
         <ModalContent>

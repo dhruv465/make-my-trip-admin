@@ -2,31 +2,75 @@
 import {
   Box,
   SimpleGrid,
-
 } from "@chakra-ui/react";
-// Assets
-import React from "react";
+import React, { useEffect, useMemo, useState } from "react";
+import axios from 'axios';
 
 import ComplexTable from "./components/ComplexTable";
-import {
-  columnsDataComplex
-} from "./variables/columnsData";
-import tableDataComplex from "./variables/tableDataComplex.json";
 import Marketplace from "../marketplace";
 
 export default function UserReports() {
-  // Chakra Color Mode
+  const [tableDataComplex, setTableDataComplex] = useState([]);
+
+  useEffect(() => {
+    const fetchFlightData = async () => {
+      try {
+        const response = await axios.get('http://localhost:5001/api/flights');
+        setTableDataComplex(response.data);
+      } catch (error) {
+        console.error('Error fetching flight data:', error);
+      }
+    };
+
+    fetchFlightData();
+  }, []);
+
+  const columnsDataComplex = useMemo(() => [
+    {
+      Header: "Departure City",
+      accessor: "departureCity",
+    },
+    {
+      Header: "Destination City",
+      accessor: "destinationCity",
+    },
+    {
+      Header: "Departure Date",
+      accessor: "departureDate",
+    },
+    {
+      Header: "Return Date",
+      accessor: "returnDate",
+    },
+    {
+      Header: "Traveler/Class",
+      accessor: "classSelection",
+    },
+    {
+      Header: "Action",
+      accessor: "_id",
+    },
+  ], []);
+
+  const handleDelete = async (flightId) => {
+    try {
+      await axios.delete(`http://localhost:5001/api/flights/${flightId}`);
+      // Update the flights data after deletion
+      setTableDataComplex(prevData => prevData.filter(flight => flight._id !== flightId));
+    } catch (error) {
+      console.error("Error deleting flight:", error);
+    }
+  };
 
   return (
     <>
       <Box pt={{ base: "130px", md: "80px", xl: "100px" }}>
-
         <SimpleGrid columns={{ base: 1, md: 1, xl: 1 }} gap='20px'>
           <ComplexTable
             columnsData={columnsDataComplex}
-            tableData={tableDataComplex}
+            tableData={tableDataComplex} // Pass tableData as a prop
+            handleDelete={handleDelete} // Pass the handleDelete function to ComplexTable
           />
-
         </SimpleGrid>
       </Box>
       <Marketplace />

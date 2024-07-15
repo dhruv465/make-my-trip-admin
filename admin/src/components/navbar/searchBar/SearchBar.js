@@ -8,7 +8,7 @@ import {
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 export function SearchBar(props) {
-  const { variant, background, children, placeholder, borderRadius, ...rest } =
+  const {  background,  placeholder, borderRadius, ...rest } =
     props;
   // Chakra Color Mode
   const searchIconColor = useColorModeValue("gray.700", "white");
