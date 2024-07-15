@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
-
 import {
     FormControl,
     FormLabel,
@@ -19,6 +18,8 @@ const FlightForm = ({ flightData, onClose }) => {
     const [returnDate, setReturnDate] = useState('');
     const [classSelection, setClassSelection] = useState([]);
     const toast = useToast();
+
+    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
     useEffect(() => {
         if (flightData) {
@@ -46,7 +47,7 @@ const FlightForm = ({ flightData, onClose }) => {
 
         try {
             if (flightData && flightData._id) {
-                await axios.put(`http://localhost:5001/api/flights/${flightData._id}`, {
+                await axios.put(`${BACKEND_URL}/api/flights/${flightData._id}`, {
                     departureCity,
                     destinationCity,
                     departureDate,
@@ -61,7 +62,7 @@ const FlightForm = ({ flightData, onClose }) => {
                     isClosable: true,
                 });
             } else {
-                await axios.post('http://localhost:5001/api/flights', {
+                await axios.post(`${BACKEND_URL}/api/flights`, {
                     departureCity,
                     destinationCity,
                     departureDate,

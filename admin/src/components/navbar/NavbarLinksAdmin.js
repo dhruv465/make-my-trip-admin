@@ -11,7 +11,7 @@ import {
 	useColorModeValue
 } from '@chakra-ui/react';
 // Custom Components
-import { SearchBar } from '../../components/navbar/searchBar/SearchBar';
+// import { SearchBar } from '../../components/navbar/searchBar/SearchBar';
 import { SidebarResponsive } from '../../components/sidebar/Sidebar';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -41,7 +41,7 @@ export default function HeaderLinks(props) {
 			p="10px"
 			borderRadius="30px"
 			boxShadow={shadow}>
-			<SearchBar mb={secondary ? { base: '10px', md: 'unset' } : 'unset'} me="10px" borderRadius="30px" />
+			{/* <SearchBar mb={secondary ? { base: '10px', md: 'unset' } : 'unset'} me="10px" borderRadius="30px" /> */}
 			<Flex
 				bg={ethBg}
 				display={secondary ? 'flex' : 'none'}
@@ -93,17 +93,7 @@ export default function HeaderLinks(props) {
 							👋&nbsp; Hey, Adela
 						</Text>
 					</Flex>
-					<Flex flexDirection="column" p="10px">
-
-						<MenuItem
-							_hover={{ bg: 'none' }}
-							_focus={{ bg: 'none' }}
-							color="red.400"
-							borderRadius="8px"
-							px="14px">
-							<Text fontSize="sm">Log out</Text>
-						</MenuItem>
-					</Flex>
+					
 				</MenuList>
 			</Menu>
 		</Flex>

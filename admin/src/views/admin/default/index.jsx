@@ -12,10 +12,12 @@ import Marketplace from "../marketplace";
 export default function UserReports() {
   const [tableDataComplex, setTableDataComplex] = useState([]);
 
+  const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
   useEffect(() => {
     const fetchFlightData = async () => {
       try {
-        const response = await axios.get('http://localhost:5001/api/flights');
+        const response = await axios.get(`${BACKEND_URL}/api/flights`);
         setTableDataComplex(response.data);
       } catch (error) {
         console.error('Error fetching flight data:', error);
@@ -23,7 +25,7 @@ export default function UserReports() {
     };
 
     fetchFlightData();
-  }, []);
+  }, [BACKEND_URL]);
 
   const columnsDataComplex = useMemo(() => [
     {
@@ -54,7 +56,7 @@ export default function UserReports() {
 
   const handleDelete = async (flightId) => {
     try {
-      await axios.delete(`http://localhost:5001/api/flights/${flightId}`);
+      await axios.delete(`${BACKEND_URL}/api/flights/${flightId}`);
       // Update the flights data after deletion
       setTableDataComplex(prevData => prevData.filter(flight => flight._id !== flightId));
     } catch (error) {

@@ -22,6 +22,8 @@ const HotelForm = ({ hotelData, onClose }) => {
   const [imageFile, setImageFile] = useState(null);
   const toast = useToast();
 
+  const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
   useEffect(() => {
     if (hotelData) {
       setHotelName(hotelData.hotelName || "");
@@ -80,7 +82,7 @@ const HotelForm = ({ hotelData, onClose }) => {
 
       if (hotelData && hotelData._id) {
         // Update existing hotel
-        await axios.put(`http://localhost:5001/api/hotels/${hotelData._id}`, {
+        await axios.put(`${BACKEND_URL}/api/hotels/${hotelData._id}`, {
           hotelName,
           cityName,
           price,
@@ -95,7 +97,7 @@ const HotelForm = ({ hotelData, onClose }) => {
         });
       } else {
         // Create new hotel
-        await axios.post('http://localhost:5001/api/hotels', {
+        await axios.post(`${BACKEND_URL}/api/hotels`, {
           hotelName,
           cityName,
           price,

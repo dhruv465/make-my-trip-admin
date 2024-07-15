@@ -24,10 +24,12 @@ export default function Marketplace() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const textColor = useColorModeValue("secondaryGray.900", "white");
 
+  const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
   useEffect(() => {
     const fetchHotels = async () => {
       try {
-        const response = await axios.get("http://localhost:5001/api/hotels");
+        const response = await axios.get(`${BACKEND_URL}/api/hotels`);
         setHotels(response.data); 
         setLoading(false);
       } catch (error) {
@@ -37,12 +39,12 @@ export default function Marketplace() {
     };
 
     fetchHotels();
-  }, []);
+  }, [BACKEND_URL]);
 
   // Function to handle deletion of a hotel
   const handleDeleteClick = async (hotelId) => {
     try {
-      await axios.delete(`http://localhost:5001/api/hotels/${hotelId}`);
+      await axios.delete(`${BACKEND_URL}/api/hotels/${hotelId}`);
       // Update the hotels state after deletion
       setHotels(hotels.filter(hotel => hotel._id !== hotelId));
     } catch (error) {
