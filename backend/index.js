@@ -19,9 +19,11 @@ app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Use routes
-app.use('/api', hotelRoutes); // Use hotelRoutes under /api
-app.use('/api', flightRoutes); // Use flightRoutes under /api
+app.use('/api/hotels', hotelRoutes); // Use hotelRoutes under /api/hotels
+app.use('/api/flights', flightRoutes); // Use flightRoutes under /api/flights
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
+
+module.exports = app;
