@@ -49,6 +49,10 @@ export default function UserReports() {
       accessor: "classSelection",
     },
     {
+      Header: "Price",
+      accessor: "price",
+    },
+    {
       Header: "Action",
       accessor: "_id",
     },

@@ -4,11 +4,11 @@ const Flight = require('../models/Flight');
 
 // Create a new flight
 router.post('/flights', async (req, res) => {
-    const { departureCity, destinationCity, departureDate, returnDate, classSelection } = req.body;
+    const { departureCity, destinationCity, departureDate, returnDate, classSelection, price } = req.body;
 
     try {
         // Save flight data to MongoDB
-        const flight = new Flight({ departureCity, destinationCity, departureDate, returnDate, classSelection });
+        const flight = new Flight({ departureCity, destinationCity, departureDate, returnDate, classSelection, price });
         await flight.save();
 
         res.status(200).json({ message: 'Flight added successfully' });
@@ -32,13 +32,13 @@ router.get('/flights', async (req, res) => {
 // Update flight details
 router.put('/flights/:id', async (req, res) => {
     const { id } = req.params;
-    const { departureCity, destinationCity, departureDate, returnDate, classSelection } = req.body;
+    const { departureCity, destinationCity, departureDate, returnDate, classSelection, price } = req.body;
 
     try {
         // Find the flight by ID and update its details
         const flight = await Flight.findByIdAndUpdate(
             id,
-            { departureCity, destinationCity, departureDate, returnDate, classSelection },
+            { departureCity, destinationCity, departureDate, returnDate, classSelection, price },
             { new: true } // Return the updated document
         );
 

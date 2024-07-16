@@ -17,6 +17,7 @@ const FlightForm = ({ flightData, onClose }) => {
     const [departureDate, setDepartureDate] = useState('');
     const [returnDate, setReturnDate] = useState('');
     const [classSelection, setClassSelection] = useState([]);
+    const [price, setPrice] = useState("");
     const toast = useToast();
 
     const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -28,13 +29,15 @@ const FlightForm = ({ flightData, onClose }) => {
             setDepartureDate(flightData.departureDate || '');
             setReturnDate(flightData.returnDate || '');
             setClassSelection(flightData.classSelection || []);
+            setPrice(flightData.price || '');
+
         }
     }, [flightData]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (!departureCity || !destinationCity || !departureDate || !returnDate) {
+        if (!departureCity || !destinationCity || !departureDate || !returnDate  || !price) {
             toast({
                 title: "Error",
                 description: "Please fill all the required fields.",
@@ -53,6 +56,7 @@ const FlightForm = ({ flightData, onClose }) => {
                     departureDate,
                     returnDate,
                     classSelection,
+                    price,
                 });
                 toast({
                     title: "Success",
@@ -68,6 +72,7 @@ const FlightForm = ({ flightData, onClose }) => {
                     departureDate,
                     returnDate,
                     classSelection,
+                    price,
                 });
                 toast({
                     title: "Success",
@@ -81,6 +86,7 @@ const FlightForm = ({ flightData, onClose }) => {
                 setDepartureDate('');
                 setReturnDate('');
                 setClassSelection([]);
+                setPrice('');
             }
 
             // onClose(); // Close the modal after successful submission
@@ -134,6 +140,16 @@ const FlightForm = ({ flightData, onClose }) => {
                         type="date"
                         value={returnDate}
                         onChange={(e) => setReturnDate(e.target.value)}
+                    />
+                </FormControl>
+
+                <FormControl id="price" isRequired>
+                    <FormLabel>Price</FormLabel>
+                    <Input
+                        type="number"
+                        placeholder="Enter price"
+                        value={price}
+                        onChange={(e) => setPrice(e.target.value)}
                     />
                 </FormControl>
 

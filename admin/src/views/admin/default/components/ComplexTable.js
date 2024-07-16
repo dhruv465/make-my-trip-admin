@@ -77,7 +77,7 @@ export default function ComplexTable({ columnsData, tableData, handleDelete }) {
             lineHeight='100%'>
             Flight Data
           </Text>
-          {/* Placeholder for your Menu component */}
+          {/* Placeholder for Menu component */}
           <Menu />
         </Flex>
         <Table {...getTableProps()} variant='simple' color='gray.500' mb='24px'>
@@ -113,12 +113,21 @@ export default function ComplexTable({ columnsData, tableData, handleDelete }) {
                       cell.column.Header === "Destination City" ||
                       cell.column.Header === "Departure Date" ||
                       cell.column.Header === "Return Date" ||
-                      cell.column.Header === "Traveler/Class") {
-                      cellData = (
-                        <Text color={textColor} fontSize='sm' fontWeight='700'>
-                          {cell.value}
-                        </Text>
-                      );
+                      cell.column.Header === "Traveler/Class" ||
+                      cell.column.Header === "Price") {
+                      if (cell.column.Header === "Traveler/Class" && Array.isArray(cell.value) && cell.value.length === 2) {
+                        cellData = (
+                          <Text color={textColor} fontSize='sm' fontWeight='700'>
+                            {cell.value.join(' / ')}
+                          </Text>
+                        );
+                      } else {
+                        cellData = (
+                          <Text color={textColor} fontSize='sm' fontWeight='700'>
+                            {cell.value}
+                          </Text>
+                        );
+                      }
                     } else if (cell.column.Header === "Action") {
                       cellData = (
                         <Flex>
