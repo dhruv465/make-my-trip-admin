@@ -9,7 +9,7 @@ import {
 import MainDashboard from "./views/admin/default";
 
 // Auth Imports
-import SignInCentered from "./views/auth/signIn";
+// import SignInCentered from "./views/auth/signIn";
 
 const routes = [
   {
