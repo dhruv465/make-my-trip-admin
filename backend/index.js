@@ -24,6 +24,7 @@ app.use('/api', flightRoutes);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
+  
 });
 
 module.exports = app;
